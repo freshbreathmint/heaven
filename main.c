@@ -3,6 +3,25 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+// Settings
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
+// Key Callback
+void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, 1);
+}
+
+// Framebuffer Size Callback
+void framebuffer_size_callback(GLFWwindow *window, int width, int height)
+{
+    // Resize viewport when window is resized.
+    glViewport(0, 0, width, height);
+}
+
+// Main
 int main() 
 {
     // Initalize and Configure GLFW - (Version 4.6, Core Profile)
@@ -15,7 +34,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create and Configure Window Object
-    GLFWwindow *window = glfwCreateWindow(800, 600, "heaven", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "heaven", NULL, NULL);
     if (window == NULL)
     {
         printf("Failed to create window.\n");
@@ -24,6 +43,10 @@ int main()
     }
     glfwMakeContextCurrent(window);
 
+    // Set Callbacks
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetKeyCallback(window, keyCallback);
+
     // Initalize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -31,12 +54,16 @@ int main()
         return 1;
     }
 
-    // Configure Viewport
-    glViewport(0, 0, 800, 600);
+    // Set Clear Buffer Color
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
     // Main Loop
     while (!glfwWindowShouldClose(window))
     {
+        // Clear Buffer
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // Swap Buffers, Poll Events
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

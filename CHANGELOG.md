@@ -1,5 +1,16 @@
 # Version History
 
+## 0.0.3
+
+Features:
+
+    - Default resolution now defined in const
+    - Added Key Callback
+        - Escape Key now closes the window
+    - Added Framebuffer Size Callback
+    - Loop now calls glClear()
+        - Clear color is set to a default tutorial color
+
 ## 0.0.2
 
 Features:
