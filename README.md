@@ -8,3 +8,6 @@ My goal is for this program to serve as a base for other games/experiences I may
 ## Credits
 Developed by Mint
 
+Libraries:
+    - GLAD
+    - GLFW
