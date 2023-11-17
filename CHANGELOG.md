@@ -1,5 +1,11 @@
 # Version History
 
+## 0.0.2
+
+Features:
+
+    - Add Glad and GLFW libraries
+
 ## 0.0.1
 
 Features:
