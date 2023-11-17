@@ -4,3 +4,5 @@ project(heaven)
 add_subdirectory(thirdparty/glad)
 
 add_executable(${PROJECT_NAME} main.c)
+
+target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE glad)
