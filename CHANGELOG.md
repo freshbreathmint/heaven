@@ -5,6 +5,7 @@
 Features:
 
     - Add Glad and GLFW libraries
+    - Program now opens a basic GLFW window
 
 ## 0.0.1
 
