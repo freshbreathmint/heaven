@@ -2,7 +2,11 @@ cmake_minimum_required(VERSION 3.25)
 project(heaven)
 
 add_subdirectory(thirdparty/glad)
+add_subdirectory(thirdparty/glfw)
 
 add_executable(${PROJECT_NAME} main.c)
 
-target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE glad)
+target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE 
+    glfw
+    glad
+    )
