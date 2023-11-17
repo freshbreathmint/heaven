@@ -5,8 +5,9 @@
 Features:
 
     - Add .gitignore
-    - Add basic program.
+    - Add basic program
     - Add CMakeLists.txt
+    - Add Toolchain-MinGW64.cmake which might not be neccesary
 
 ## 0.0.0
 
