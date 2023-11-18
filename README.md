@@ -12,5 +12,6 @@ Escape to Quit
 Developed by Mint
 
 Libraries:
-    * GLAD
-    * GLFW
+
+    - GLAD
+    - GLFW
