@@ -19,6 +19,7 @@ include_directories(include)
 set(SOURCES
     src/main.c
     src/readfile.c
+    src/shader.c
 )
 
 # Add Executable

@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "readfile.h"
+#include "shader.h"
 
 // Settings
 const unsigned int SCR_WIDTH = 800;
@@ -56,6 +56,10 @@ int main()
         return 1;
     }
 
+    // Build Shaders
+    Shader shader;
+    Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
+
     // Vertex Data
     float verticies[] = {
         -0.5f, -0.5f, 0.0f,
@@ -63,17 +67,19 @@ int main()
          0.0f,  0.5f, 0.0f
     };
 
-    // Generate Buffer Object
-    unsigned int VBO;
+    // Generate  & Configure Array/Buffers
+    unsigned int VAO, VBO;
+    glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
-    /* TEST AREA - READFILE TEST */
-    char *testFile = readFile("resources/test.txt");
-    printf("%s\n", testFile);
+    glBindVertexArray(VAO);
 
-    // Bind Buffer Object & Send Data
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(verticies), verticies, GL_STATIC_DRAW);
+
+    // Link Vertex Attributes
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -83,6 +89,11 @@ int main()
     {
         // Clear Buffer
         glClear(GL_COLOR_BUFFER_BIT);
+
+        // Use Shader
+        Shader_use(&shader);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);

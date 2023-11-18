@@ -4,7 +4,7 @@
 char *readFile (const char *filename)
 {
     // Open the file
-    FILE *file = fopen(filename, "r");
+    FILE *file = fopen(filename, "rb");
     if (file == NULL) {
         printf("Failed to open file: %s\n", filename);
         return NULL;
@@ -14,6 +14,13 @@ char *readFile (const char *filename)
     fseek(file, 0, SEEK_END);
     long fileSize = ftell(file);
     rewind(file);
+
+    // Sanity
+    if (fileSize <= 0) {
+        printf("File size is zero or negative: %s\n", filename);
+        fclose(file);
+        return NULL;
+    }
 
     // Allocate memory for the file
     char *buffer = (char*)malloc(fileSize + 1);
@@ -26,6 +33,7 @@ char *readFile (const char *filename)
     // Read file into buffer
     size_t bytesRead = fread(buffer, 1, fileSize, file);
     if (bytesRead != fileSize) {
+        perror("Error opening file");
         printf("Failed to read file: %s\n", filename);
         fclose(file);
         return NULL;
@@ -36,4 +44,9 @@ char *readFile (const char *filename)
 
     fclose(file);
     return buffer;
+}
+
+void freeFile(char *fileContent)
+{
+    free(fileContent);
 }

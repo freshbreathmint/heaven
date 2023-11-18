@@ -2,5 +2,6 @@
 #define READFILE_H
 
 char *readFile(const char *filename);
+void freeFile(char *fileContent);
 
-#endif
+#endif //READFILE_H

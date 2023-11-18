@@ -1,5 +1,12 @@
 # Version History
 
+## 0.0.4
+Features:
+    - Based Triangle???
+    - Barebones shader system
+    - Basic vertex and fragment shaders
+    - File reading system
+
 ## 0.0.3
 
 Features:
