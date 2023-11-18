@@ -1,2 +1,5 @@
 # Build Files/Folders
 build/
+
+# IDE Related
+.vscode/
