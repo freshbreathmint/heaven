@@ -3,6 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "readfile.h"
+
 // Settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -64,6 +66,10 @@ int main()
     // Generate Buffer Object
     unsigned int VBO;
     glGenBuffers(1, &VBO);
+
+    /* TEST AREA - READFILE TEST */
+    char *testFile = readFile("resources/test.txt");
+    printf("%s\n", testFile);
 
     // Bind Buffer Object & Send Data
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
