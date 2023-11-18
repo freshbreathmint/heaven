@@ -54,6 +54,21 @@ int main()
         return 1;
     }
 
+    // Vertex Data
+    float verticies[] = {
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+         0.0f,  0.5f, 0.0f
+    };
+
+    // Generate Buffer Object
+    unsigned int VBO;
+    glGenBuffers(1, &VBO);
+
+    // Bind Buffer Object & Send Data
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(verticies), verticies, GL_STATIC_DRAW);
+
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 

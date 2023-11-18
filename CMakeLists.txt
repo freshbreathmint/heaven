@@ -9,9 +9,13 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 add_subdirectory(thirdparty/glad)
 add_subdirectory(thirdparty/glfw)
 
-add_executable(${PROJECT_NAME} main.c)
+set(SOURCES
+    src/main.c
+)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE 
     glfw
     glad
-    )
+)
