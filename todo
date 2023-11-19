@@ -1,0 +1,3 @@
+- modular vertex/indice loading, to support different configurations of triangles
+- modular VAO/VBO/EBO system??
+- system that allows for two different triangles with different fragment shaders
