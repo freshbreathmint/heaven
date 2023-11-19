@@ -8,6 +8,8 @@ My goal is for this program to serve as a base for other games/experiences I may
 ## Controls
 Escape to Quit
 
+X = Toggle Wireframe Mode
+
 ## Credits
 Developed by Mint
 

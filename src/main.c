@@ -9,11 +9,22 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+static _Bool wireframeMode = 0; // 0 = FILL, 1 = WIREFRAME
+
 // Key Callback
 void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
             glfwSetWindowShouldClose(window, 1);
+    
+    if (key == GLFW_KEY_X && action == GLFW_PRESS)
+    {
+        wireframeMode = !wireframeMode;
+        if (wireframeMode)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        else
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
 }
 
 // Framebuffer Size Callback
@@ -60,22 +71,31 @@ int main()
     Shader shader;
     Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
 
-    // Vertex Data
+    // Vertex & Indice Data
     float verticies[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
+         0.5f,  0.5f, 0.0f,     // Top Right
+         0.5f, -0.5f, 0.0f,     // Bottom Right
+        -0.5f, -0.5f, 0.0f,     // Bottom Left
+        -0.5f,  0.5f, 0.0f      // Top Left
+    };
+
+    unsigned int indices[] = {
+        0, 1, 3,
+        1, 2, 3
     };
 
     // Generate  & Configure Array/Buffers
-    unsigned int VAO, VBO;
+    unsigned int VAO, VBO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
 
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(verticies), verticies, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     // Link Vertex Attributes
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -93,7 +113,7 @@ int main()
         // Use Shader
         Shader_use(&shader);
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);

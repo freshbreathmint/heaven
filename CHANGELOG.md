@@ -1,7 +1,16 @@
 # Version History
 
-## 0.0.4
+## 0.0.5
+
 Features:
+
+    - Holy shit two triangles!?
+    - Added wireframe mode (Press X to Toggle)
+
+## 0.0.4
+
+Features:
+
     - Based Triangle???
     - Barebones shader system
     - Basic vertex and fragment shaders
