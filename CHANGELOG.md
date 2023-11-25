@@ -1,5 +1,11 @@
 # Version History
 
+## 0.0.6
+
+Features:
+
+    - VAO, VBO, EBO, are now stored inside of an Object struct.
+
 ## 0.0.5
 
 Features:
