@@ -1,3 +1,5 @@
 - modular vertex/indice loading, to support different configurations of triangles
 - modular VAO/VBO/EBO system??
 - system that allows for two different triangles with different fragment shaders
+- seperate executable project from engine (make engine into a library, seperate executable structure.)
+- proper logging
