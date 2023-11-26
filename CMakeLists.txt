@@ -17,6 +17,7 @@ include_directories(include)
 
 # Set Sources
 set(SOURCES
+    src/geometry.c
     src/main.c
     src/object.c
     src/readfile.c

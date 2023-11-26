@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "geometry.h"
 #include "object.h"
 #include "shader.h"
 
@@ -72,6 +73,7 @@ int main()
     Shader shader;
     Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
 
+    /*
     // Vertex & Indice Data
     float verticies[] = {
          0.5f,  0.5f, 0.0f,     // Top Right
@@ -84,10 +86,15 @@ int main()
         0, 1, 3,
         1, 2, 3
     };
+    */
+
+    // Load Geometry
+    Geometry geometry;
+    readGeometry(&geometry, "resources/quad.txt");
 
     // Create Object
     Object object;
-    createObject(&object, verticies, indices, sizeof(verticies), sizeof(indices));
+    createObject(&object, &geometry);
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

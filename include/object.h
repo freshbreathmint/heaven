@@ -7,6 +7,6 @@ typedef struct Object {
     unsigned int EBO;
 } Object;
 
-void createObject(Object *object, float *vertices, unsigned int *indices, size_t numVertices, size_t numIndices);
+void createObject(Object *object, Geometry *geometry);
 
-#endif //OBJECT_H
+#endif // OBJECT_H
