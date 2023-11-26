@@ -1,5 +1,12 @@
 # Version History
 
+## 0.0.7
+
+Features:
+
+    - Geometry can be read from a file now. The system is modular!!!
+
+
 ## 0.0.6
 
 Features:
