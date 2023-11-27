@@ -73,21 +73,6 @@ int main()
     Shader shader;
     Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
 
-    /*
-    // Vertex & Indice Data
-    float verticies[] = {
-         0.5f,  0.5f, 0.0f,     // Top Right
-         0.5f, -0.5f, 0.0f,     // Bottom Right
-        -0.5f, -0.5f, 0.0f,     // Bottom Left
-        -0.5f,  0.5f, 0.0f      // Top Left
-    };
-
-    unsigned int indices[] = {
-        0, 1, 3,
-        1, 2, 3
-    };
-    */
-
     // Load Geometry
     Geometry geometry;
     readGeometry(&geometry, "resources/quad.txt");
