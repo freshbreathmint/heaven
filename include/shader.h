@@ -11,6 +11,6 @@ void Shader_use(const Shader *shader);
 void Shader_setBool(const Shader *shader, const char *name, int value);
 void Shader_setInt(const Shader *shader, const char *name, int value);
 void Shader_setFloat(const Shader *shader, const char *name, int value);
-void Shader_setColor(const Shader *shader, const char *name, float r, float g, float b, float a);
+void Shader_setFloat4(const Shader *shader, const char *name, float f1, float f2, float f3, float f4);
 
 #endif // SHADER_H

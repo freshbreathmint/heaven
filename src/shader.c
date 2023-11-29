@@ -83,7 +83,7 @@ void Shader_setFloat(const Shader *shader, const char *name, int value)
     glUniform1f(glGetUniformLocation(shader->ID, name), value);
 }
 
-void Shader_setColor(const Shader *shader, const char *name, float r, float g, float b, float a)
+void Shader_setFloat4(const Shader *shader, const char *name, float f1, float f2, float f3, float f4)
 {
-    glUniform4f(glGetUniformLocation(shader->ID, name), r, g, b, a);
+    glUniform4f(glGetUniformLocation(shader->ID, name), f1, f2, f3, f4);
 }
