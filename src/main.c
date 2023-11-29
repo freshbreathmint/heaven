@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 
 #include <glad/glad.h>
@@ -6,6 +7,7 @@
 #include "object.h"
 #include "render.h"
 #include "shader.h"
+#include "texture.h"
 
 // Settings
 const unsigned int SCR_WIDTH = 800;
@@ -71,15 +73,18 @@ int main()
 
     // Build Shaders
     Shader shader;
-    Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
+    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Mix.glsl");
 
-    // Load Object
+    // Create Objects
     Object object;
-    createObject(&object, "resources/geometry/exercise2-1.txt");
+    createObject(&object, "resources/geometry/quad.txt");
 
-    Object object2;
-    createObject(&object2, "resources/geometry/exercise2-2.txt");
-
+    // Load Textures
+    unsigned int texture = loadTexture("resources/texture/container.jpg", GL_RGB, GL_RGB);
+    unsigned int texture2 = loadTexture("resources/texture/awesomeface.png", GL_RGBA, GL_RGBA);
+    Shader_use(&shader);
+    Shader_setInt(&shader, "textureInput", 0);
+    Shader_setInt(&shader, "textureInput2", 1);
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -90,9 +95,14 @@ int main()
         // Clear Buffer
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // Bind Texture
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
+
         // Render Object(s)
         renderObject(&shader, &object);
-        renderObject(&shader, &object2);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);

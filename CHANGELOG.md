@@ -1,8 +1,44 @@
 # Version History
 
+## 0.0.12
+
+Features:
+
+    - Added stb_image library
+    - Added textures, we use texture coordinates in our geometry now. good stuff.
+    - Removed exercises
+    - Added different fragment shaders.
+    - Added three new textures
+
+## 0.0.11
+
+Features:
+    
+    - Added new exercise shaders
+    - CMake now properly copies resources to build every time.
+
+## 0.0.10
+
+Features:
+
+    - Colored triangle.
+    - Cleaned up old geometry and shader data, we are using colored vertex attributes now.
+    - Changed setColor to setFloat4
+
+## 0.0.9
+
+Features:
+    
+    - Moved shaders into resources/shader/
+    - New uniform functions for shaders
+    - Added tri.txt to geometry
+    - Custom color fragment shader
+    - Flashing green triangle!!!
+
 ## 0.0.8
 
 Features:
+
     - Geometry and Object structs are now the same, very clean.
     - Added rendering function.
 
