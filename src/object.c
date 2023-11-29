@@ -98,10 +98,15 @@ void createObject(Object *object, const char *filename)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, object->EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * object->numIndices, object->indices, GL_STATIC_DRAW);
 
-    // Link Vertex Attributes
-    // NOTE: This needs to be changed later to optimize itself based on what kind of Geometry Data there is, alternateively use the standard. Idk which.
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // Link Attributes
+    // TODO: Figure out how to make this modular? Alternatively, figure out something that just works.
+    
+    // Vertex:
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    // Color:
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     //Unbind Array & Free Geometry Data
     glBindVertexArray(0);
