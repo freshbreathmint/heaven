@@ -1,5 +1,15 @@
 # Version History
 
+## 0.0.12
+
+Features:
+
+    - Added stb_image library
+    - Added textures, we use texture coordinates in our geometry now. good stuff.
+    - Removed exercises
+    - Added different fragment shaders.
+    - Added three new textures
+
 ## 0.0.11
 
 Features:
