@@ -33,5 +33,11 @@ target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE
     glad
 )
 
-# Copy resources/ to build/
-file(COPY ${CMAKE_SOURCE_DIR}/resources DESTINATION ${CMAKE_BINARY_DIR})
+# Copy resources/ to build/ using a custom command
+add_custom_target(copy_resources ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:${PROJECT_NAME}>/resources
+)
+
+# Make sure that the "copy_resources" target is built before your main executable
+add_dependencies(${PROJECT_NAME} copy_resources)
