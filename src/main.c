@@ -72,11 +72,13 @@ int main()
 
     // Build Shaders
     Shader shader;
-    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Default.glsl");
+    Shader_init(&shader, "resources/shader/vertexShader-Exercise3.glsl", "resources/shader/fragmentShader-Exercise3.glsl");
 
     // Load Object
     Object object;
     createObject(&object, "resources/geometry/quad.txt");
+
+    float offset = 0.0f;
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -86,6 +88,10 @@ int main()
     {
         // Clear Buffer
         glClear(GL_COLOR_BUFFER_BIT);
+
+        // Increase offset
+        float offset = 0.5f;
+        Shader_setFloat(&shader, "xOffset", offset);
 
         // Render Object(s)
         renderObject(&shader, &object);
