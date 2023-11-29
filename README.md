@@ -17,3 +17,4 @@ Libraries:
 
     - GLAD
     - GLFW
+    - STB_Image
