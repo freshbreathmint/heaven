@@ -72,11 +72,11 @@ int main()
 
     // Build Shaders
     Shader shader;
-    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-CustomColor.glsl");
+    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Default.glsl");
 
     // Load Object
     Object object;
-    createObject(&object, "resources/geometry/tri.txt");
+    createObject(&object, "resources/geometry/quad.txt");
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -86,11 +86,6 @@ int main()
     {
         // Clear Buffer
         glClear(GL_COLOR_BUFFER_BIT);
-
-        // Color Fuckery
-        float timeValue = glfwGetTime();
-        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
-        Shader_setColor(&shader, "ourColor", 0.0f, greenValue, 0.0f, 1.0f);
 
         // Render Object(s)
         renderObject(&shader, &object);
