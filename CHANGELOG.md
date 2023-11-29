@@ -1,8 +1,19 @@
 # Version History
 
+## 0.0.9
+
+Features:
+    
+    - Moved shaders into resources/shader/
+    - New uniform functions for shaders
+    - Added tri.txt to geometry
+    - Custom color fragment shader
+    - Flashing green triangle!!!
+
 ## 0.0.8
 
 Features:
+
     - Geometry and Object structs are now the same, very clean.
     - Added rendering function.
 
