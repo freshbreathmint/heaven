@@ -3,8 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "geometry.h"
 #include "object.h"
+#include "render.h"
 #include "shader.h"
 
 // Settings
@@ -73,18 +73,13 @@ int main()
     Shader shader;
     Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
 
-    // Load Geometry
-    Geometry geometry1;
-    readGeometry(&geometry1, "resources/geometry/exercise2-1.txt");
-
-    Object object1;
-    createObject(&object1, &geometry1);
-
-    Geometry geometry2;
-    readGeometry(&geometry2, "resources/geometry/exercise2-2.txt");
+    // Load Object
+    Object object;
+    createObject(&object, "resources/geometry/exercise2-1.txt");
 
     Object object2;
-    createObject(&object2, &geometry2);
+    createObject(&object2, "resources/geometry/exercise2-2.txt");
+
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -95,11 +90,9 @@ int main()
         // Clear Buffer
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Use Shader
-        //TODO NEXT: add rendering function
-        Shader_use(&shader);
-        glBindVertexArray(object1.VAO);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        // Render Object(s)
+        renderObject(&shader, &object);
+        renderObject(&shader, &object2);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);
