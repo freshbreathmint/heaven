@@ -3,17 +3,30 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "object.h"
+#include "render.h"
 #include "shader.h"
 
 // Settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+static _Bool wireframeMode = 0; // 0 = FILL, 1 = WIREFRAME
+
 // Key Callback
 void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
             glfwSetWindowShouldClose(window, 1);
+    
+    if (key == GLFW_KEY_X && action == GLFW_PRESS)
+    {
+        wireframeMode = !wireframeMode;
+        if (wireframeMode)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        else
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
 }
 
 // Framebuffer Size Callback
@@ -60,26 +73,13 @@ int main()
     Shader shader;
     Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
 
-    // Vertex Data
-    float verticies[] = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f
-    };
+    // Load Object
+    Object object;
+    createObject(&object, "resources/geometry/exercise2-1.txt");
 
-    // Generate  & Configure Array/Buffers
-    unsigned int VAO, VBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    Object object2;
+    createObject(&object2, "resources/geometry/exercise2-2.txt");
 
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(verticies), verticies, GL_STATIC_DRAW);
-
-    // Link Vertex Attributes
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -90,10 +90,9 @@ int main()
         // Clear Buffer
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Use Shader
-        Shader_use(&shader);
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        // Render Object(s)
+        renderObject(&shader, &object);
+        renderObject(&shader, &object2);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);

@@ -4,4 +4,4 @@
 char *readFile(const char *filename);
 void freeFile(char *fileContent);
 
-#endif //READFILE_H
+#endif // READFILE_H

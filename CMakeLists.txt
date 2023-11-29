@@ -18,7 +18,9 @@ include_directories(include)
 # Set Sources
 set(SOURCES
     src/main.c
+    src/object.c
     src/readfile.c
+    src/render.c
     src/shader.c
 )
 

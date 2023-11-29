@@ -1,0 +1,5 @@
+- maybe combine geometry and object struct/creation?
+- rendering function
+- system that allows for two different triangles with different fragment shaders
+- seperate executable project from engine (make engine into a library, seperate executable structure.)
+- proper logging

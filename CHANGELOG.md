@@ -1,7 +1,35 @@
 # Version History
 
-## 0.0.4
+## 0.0.8
+
 Features:
+    - Geometry and Object structs are now the same, very clean.
+    - Added rendering function.
+
+## 0.0.7
+
+Features:
+
+    - Geometry can be read from a file now. The system is modular!!!
+
+
+## 0.0.6
+
+Features:
+
+    - VAO, VBO, EBO, are now stored inside of an Object struct.
+
+## 0.0.5
+
+Features:
+
+    - Holy shit two triangles!?
+    - Added wireframe mode (Press X to Toggle)
+
+## 0.0.4
+
+Features:
+
     - Based Triangle???
     - Barebones shader system
     - Basic vertex and fragment shaders
