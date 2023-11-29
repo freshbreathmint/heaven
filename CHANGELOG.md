@@ -1,5 +1,12 @@
 # Version History
 
+## 0.0.11
+
+Features:
+    
+    - Added new exercise shaders
+    - CMake now properly copies resources to build every time.
+
 ## 0.0.10
 
 Features:
