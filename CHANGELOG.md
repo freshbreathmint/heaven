@@ -1,5 +1,13 @@
 # Version History
 
+## 0.0.10
+
+Features:
+
+    - Colored triangle.
+    - Cleaned up old geometry and shader data, we are using colored vertex attributes now.
+    - Changed setColor to setFloat4
+
 ## 0.0.9
 
 Features:
