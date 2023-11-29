@@ -1,5 +1,11 @@
 # Version History
 
+## 0.0.8
+
+Features:
+    - Geometry and Object structs are now the same, very clean.
+    - Added rendering function.
+
 ## 0.0.7
 
 Features:
