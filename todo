@@ -1,2 +1,3 @@
+- figure out a way to load textures better so that it's modular or something
 - seperate executable project from engine (make engine into a library, seperate executable structure.)
 - proper logging
