@@ -71,7 +71,10 @@ int main()
 
     // Build Shaders
     Shader shader;
-    Shader_init(&shader, "resources/vertexShader.glsl", "resources/fragmentShader.glsl");
+    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Default.glsl");
+
+    Shader yellow;
+    Shader_init(&yellow, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Yellow.glsl");
 
     // Load Object
     Object object;
@@ -92,7 +95,7 @@ int main()
 
         // Render Object(s)
         renderObject(&shader, &object);
-        renderObject(&shader, &object2);
+        renderObject(&yellow, &object2);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);
