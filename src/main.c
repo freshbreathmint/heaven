@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 
+#include <cglm/cglm.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -88,6 +89,25 @@ int main()
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+    /* Vector Playground */
+    vec4 vec = {1.0f, 0.0f, 0.0f, 1.0f}; // Create an array 'vector' with four dimensions
+    mat4 trans; // Create an empty matrix
+    glm_mat4_identity(trans); // Initalize as identity matrix which looks like this:
+    
+    /*
+    1 0 0 0
+    0 1 0 0
+    0 0 1 0
+    0 0 0 1
+    */
+
+    vec3 translation = {1.0f, 1.0f, 0.0f}; // Creates a translation vector
+    glm_translate(trans, translation); // Applies the translation vector to the matrix
+
+    glm_mat4_mulv(trans, vec, vec); // Applies the matrix to the vec4
+
+    printf("Vector: %f %f %f %f\n", vec[0], vec[1], vec[2], vec[3]); // Print the vec4
 
     // Main Loop
     while (!glfwWindowShouldClose(window))
