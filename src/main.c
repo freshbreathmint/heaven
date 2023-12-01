@@ -96,6 +96,11 @@ int main()
         // Clear Buffer
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // Bind Texture
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
 
         /* Vector Playground */
         mat4 trans; // Create an empty matrix
@@ -118,16 +123,23 @@ int main()
         glm_scale(trans, scale);
 
         Shader_setMatrix4fv(&shader, "transform", 1, GL_FALSE, trans);
+
+        renderObject(&shader, &object); // First Render
+
+        glm_mat4_identity(trans); // Reset matrix
+        
+        glm_vec3_copy((vec3){-0.5f, 0.5f, 0.0f}, translate);
+
+        glm_translate(trans, translate);
+        glm_rotate(trans, angle, axis);
+        glm_scale(trans, scale);
+
+        Shader_setMatrix4fv(&shader, "transform", 1, GL_FALSE, trans);
+        renderObject(&shader, &object); // Second Render with new translation
         /* Figure out how this shit works before you continue */
 
-        // Bind Texture
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
-
         // Render Object(s)
-        renderObject(&shader, &object);
+        //renderObject(&shader, &object);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);
