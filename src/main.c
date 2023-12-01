@@ -108,14 +108,14 @@ int main()
         0 0 0 1
         */
 
-        float angle = 0.0f;
-        //float angle = (float)glfwGetTime();
+        float angle = (float)glfwGetTime();
         vec3 axis = {0.0f, 0.0f, 1.0f};
         vec3 scale = {0.5f, 0.5f, 0.5f};
+        vec3 translate = {0.5f, -0.5f, 0.0f};
 
+        glm_translate(trans, translate);
         glm_rotate(trans, angle, axis);
-        
-        
+        glm_scale(trans, scale);
 
         Shader_setMatrix4fv(&shader, "transform", 1, GL_FALSE, trans);
         /* Figure out how this shit works before you continue */
