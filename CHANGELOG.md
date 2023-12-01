@@ -1,5 +1,11 @@
 # Version History
 
+## 0.0.13
+
+Features:
+    - Add CGLM library
+    - There's a second box, and the boxes are now rotating. Thrilling.
+
 ## 0.0.12
 
 Features:
