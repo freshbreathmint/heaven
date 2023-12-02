@@ -101,14 +101,11 @@ void createObject(Object *object, const char *filename)
     // TODO: Figure out how to make this modular? Alternatively, figure out something that just works.
     
     // Vertex:
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    // Color:
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3* sizeof(float)));
+    // Texture Coordinates:
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3* sizeof(float)));
     glEnableVertexAttribArray(1);
-    // Texture Coordinates
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
 
     //Unbind Array & Free Geometry Data
     glBindVertexArray(0);
