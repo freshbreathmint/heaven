@@ -14,6 +14,8 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+const float FOV = 45.0f;
+
 static _Bool wireframeMode = 0; // 0 = FILL, 1 = WIREFRAME
 
 // Key Callback
@@ -74,18 +76,16 @@ int main()
 
     // Build Shaders
     Shader shader;
-    Shader_init(&shader, "resources/shader/vertexShader-Transform.glsl", "resources/shader/fragmentShader-Mix.glsl");
+    Shader_init(&shader, "resources/shader/vertexShader-3D.glsl", "resources/shader/fragmentShader-Color.glsl");
 
     // Create Objects
     Object object;
     createObject(&object, "resources/geometry/quad.txt");
 
     // Load Textures
-    unsigned int texture = loadTexture("resources/texture/container.jpg", GL_RGB, GL_RGB);
-    unsigned int texture2 = loadTexture("resources/texture/awesomeface.png", GL_RGBA, GL_RGBA);
+    unsigned int texture = loadTexture("resources/texture/mints.png", GL_RGB, GL_RGB);
     Shader_use(&shader);
     Shader_setInt(&shader, "textureInput", 0);
-    Shader_setInt(&shader, "textureInput2", 1);
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -99,47 +99,30 @@ int main()
         // Bind Texture
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
 
-        /* Vector Playground */
-        mat4 trans; // Create an empty matrix
-        glm_mat4_identity(trans); // Initalize as identity matrix which looks like this:
+        /* Vector Playground 3D */
+        // Initalize Transformation Matricies
+        mat4 model, view, projection;
+
+        glm_mat4_identity(model);
+        glm_rotate(model, (float)glfwGetTime(), (vec3){0.0f, 1.0f, 0.0f});
+
+        glm_mat4_identity(view);
+        glm_translate(view, (vec3){0.0f, 0.0f, -3.0f});
         
-        /*
-        1 0 0 0
-        0 1 0 0
-        0 0 1 0
-        0 0 0 1
-        */
+        glm_mat4_identity(projection);
+        glm_perspective(glm_rad(FOV), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f, projection);
 
-        float angle = (float)glfwGetTime();
-        vec3 axis = {0.0f, 0.0f, 1.0f};
-        vec3 scale = {0.5f, 0.5f, 0.5f};
-        vec3 translate = {0.5f, -0.5f, 0.0f};
+        // Pass To Shaders
+        Shader_use(&shader);
+        Shader_setMatrix4fv(&shader, "model", model);
+        Shader_setMatrix4fv(&shader, "view", view);
+        Shader_setMatrix4fv(&shader, "projection", projection);
 
-        glm_translate(trans, translate);
-        glm_rotate(trans, angle, axis);
-        glm_scale(trans, scale);
-
-        Shader_setMatrix4fv(&shader, "transform", 1, GL_FALSE, trans);
-
-        renderObject(&shader, &object); // First Render
-
-        glm_mat4_identity(trans); // Reset matrix
-        
-        glm_vec3_copy((vec3){-0.5f, 0.5f, 0.0f}, translate);
-
-        glm_translate(trans, translate);
-        glm_rotate(trans, angle, axis);
-        glm_scale(trans, scale);
-
-        Shader_setMatrix4fv(&shader, "transform", 1, GL_FALSE, trans);
-        renderObject(&shader, &object); // Second Render with new translation
-        /* Figure out how this shit works before you continue */
+        /* End Vector Playground */
 
         // Render Object(s)
-        //renderObject(&shader, &object);
+        renderObject(&shader, &object);
 
         // Swap Buffers, Poll Events
         glfwSwapBuffers(window);
