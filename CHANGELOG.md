@@ -1,5 +1,13 @@
 # Version History
 
+## 0.0.14
+
+Features: 
+    - Real ass 3D graphics
+    - Projection, view, model matricies (not permanant solution probably)
+    - Added mints.png for vanity
+    - Shader_setMatrix4fv now only takes two arguments for brevity.
+
 ## 0.0.13
 
 Features:
