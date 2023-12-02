@@ -73,14 +73,17 @@ int main()
         printf("Failed to initalize GLAD.\n");
         return 1;
     }
+    
+    // Enable Depth Testing
+    glEnable(GL_DEPTH_TEST);
 
     // Build Shaders
     Shader shader;
-    Shader_init(&shader, "resources/shader/vertexShader-3D.glsl", "resources/shader/fragmentShader-Color.glsl");
+    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Default.glsl");
 
     // Create Objects
     Object object;
-    createObject(&object, "resources/geometry/quad.txt");
+    createObject(&object, "resources/geometry/cube.txt");
 
     // Load Textures
     unsigned int texture = loadTexture("resources/texture/mints.png", GL_RGB, GL_RGB);
@@ -94,7 +97,7 @@ int main()
     while (!glfwWindowShouldClose(window))
     {
         // Clear Buffer
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Bind Texture
         glActiveTexture(GL_TEXTURE0);
@@ -105,7 +108,7 @@ int main()
         mat4 model, view, projection;
 
         glm_mat4_identity(model);
-        glm_rotate(model, (float)glfwGetTime(), (vec3){0.0f, 1.0f, 0.0f});
+        glm_rotate(model, (float)glfwGetTime() * glm_rad(50.0f), (vec3){0.5f, 1.0f, 0.0f});
 
         glm_mat4_identity(view);
         glm_translate(view, (vec3){0.0f, 0.0f, -3.0f});
@@ -118,7 +121,6 @@ int main()
         Shader_setMatrix4fv(&shader, "model", model);
         Shader_setMatrix4fv(&shader, "view", view);
         Shader_setMatrix4fv(&shader, "projection", projection);
-
         /* End Vector Playground */
 
         // Render Object(s)
