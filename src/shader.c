@@ -86,7 +86,7 @@ void Shader_setFloat4(const Shader *shader, const char *name, float f1, float f2
     glUniform4f(glGetUniformLocation(shader->ID, name), f1, f2, f3, f4);
 }
 
-void Shader_setMatrix4fv(const Shader *shader, const char *name, unsigned int count, GLboolean transpose, mat4 data)
+void Shader_setMatrix4fv(const Shader *shader, const char *name, mat4 data)
 {
-    glUniformMatrix4fv(glGetUniformLocation(shader->ID, name), count, transpose, data[0]);
+    glUniformMatrix4fv(glGetUniformLocation(shader->ID, name), 1, GL_FALSE, data[0]);
 }
