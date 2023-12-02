@@ -9,7 +9,8 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 # Build Subdirectories
-add_subdirectory(thirdparty/glad)       # GLAD & KHR
+add_subdirectory(thirdparty/cglm)       # cGLM
+add_subdirectory(thirdparty/glad)       # Glad & KHR
 add_subdirectory(thirdparty/glfw)       # GLFW
 add_subdirectory(thirdparty/stb_image)  # STB Image
 
@@ -31,6 +32,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Link Libraries
 target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE 
+    cglm
     glfw
     glad
     stb_image

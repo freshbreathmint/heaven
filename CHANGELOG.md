@@ -1,5 +1,31 @@
 # Version History
 
+## 0.0.15
+
+Features
+
+    - Cleaned up shaders, we are just using verticies and texture coords now, no more color.
+    - Added cube geometry
+    - Updated default shaders
+    - Updated old geometry to not use color
+    - Rotating 3D cube wow
+
+## 0.0.14
+
+Features: 
+
+    - Real ass 3D graphics
+    - Projection, view, model matricies (not permanant solution probably)
+    - Added mints.png for vanity
+    - Shader_setMatrix4fv now only takes two arguments for brevity.
+
+## 0.0.13
+
+Features:
+
+    - Add CGLM library
+    - There's a second box, and the boxes are now rotating. Thrilling.
+
 ## 0.0.12
 
 Features:

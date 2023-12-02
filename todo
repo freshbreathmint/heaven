@@ -1,3 +1,4 @@
-- figure out a way to load textures better so that it's modular or something
+- figure out how to render as many cubes as i want
+- figure out a way to intergrate textures into the object creation process better
 - seperate executable project from engine (make engine into a library, seperate executable structure.)
 - proper logging

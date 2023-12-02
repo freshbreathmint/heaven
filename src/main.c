@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 
+#include <cglm/cglm.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -12,6 +13,8 @@
 // Settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
+const float FOV = 45.0f;
 
 static _Bool wireframeMode = 0; // 0 = FILL, 1 = WIREFRAME
 
@@ -70,21 +73,22 @@ int main()
         printf("Failed to initalize GLAD.\n");
         return 1;
     }
+    
+    // Enable Depth Testing
+    glEnable(GL_DEPTH_TEST);
 
     // Build Shaders
     Shader shader;
-    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Mix.glsl");
+    Shader_init(&shader, "resources/shader/vertexShader-Default.glsl", "resources/shader/fragmentShader-Default.glsl");
 
     // Create Objects
     Object object;
-    createObject(&object, "resources/geometry/quad.txt");
+    createObject(&object, "resources/geometry/cube.txt");
 
     // Load Textures
-    unsigned int texture = loadTexture("resources/texture/container.jpg", GL_RGB, GL_RGB);
-    unsigned int texture2 = loadTexture("resources/texture/awesomeface.png", GL_RGBA, GL_RGBA);
+    unsigned int texture = loadTexture("resources/texture/mints.png", GL_RGB, GL_RGB);
     Shader_use(&shader);
     Shader_setInt(&shader, "textureInput", 0);
-    Shader_setInt(&shader, "textureInput2", 1);
 
     // Set Clear Buffer Color
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -93,13 +97,31 @@ int main()
     while (!glfwWindowShouldClose(window))
     {
         // Clear Buffer
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Bind Texture
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
+
+        /* Vector Playground 3D */
+        // Initalize Transformation Matricies
+        mat4 model, view, projection;
+
+        glm_mat4_identity(model);
+        glm_rotate(model, (float)glfwGetTime() * glm_rad(50.0f), (vec3){0.5f, 1.0f, 0.0f});
+
+        glm_mat4_identity(view);
+        glm_translate(view, (vec3){0.0f, 0.0f, -3.0f});
+        
+        glm_mat4_identity(projection);
+        glm_perspective(glm_rad(FOV), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f, projection);
+
+        // Pass To Shaders
+        Shader_use(&shader);
+        Shader_setMatrix4fv(&shader, "model", model);
+        Shader_setMatrix4fv(&shader, "view", view);
+        Shader_setMatrix4fv(&shader, "projection", projection);
+        /* End Vector Playground */
 
         // Render Object(s)
         renderObject(&shader, &object);

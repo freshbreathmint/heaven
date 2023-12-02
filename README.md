@@ -15,5 +15,7 @@ Developed by Mint
 
 Libraries:
 
+    - CGLM
     - GLAD
     - GLFW
+    - STB_Image
