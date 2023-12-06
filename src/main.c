@@ -41,17 +41,36 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
         else
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
+
+    // Basic camera system
     
-    
+    float speed = camera.cameraSpeed * deltaTime;
+    vec3 moveDirection;
 
     if (key == GLFW_KEY_W && action == GLFW_PRESS)
-        //todo
+    {
+        glm_vec3_scale(camera.front, camera.cameraSpeed, moveDirection);
+        glm_vec3_add(camera.position, moveDirection, camera.position);
+    }
+
     if (key == GLFW_KEY_S && action == GLFW_PRESS)
-        //todo
+    {
+        glm_vec3_scale(camera.front, camera.cameraSpeed, moveDirection);
+        glm_vec3_sub(camera.position, moveDirection, camera.position);
+    }
+
     if (key == GLFW_KEY_A && action == GLFW_PRESS)
-        //todo
+    {
+        glm_vec3_scale(camera.right, camera.cameraSpeed, moveDirection);
+        glm_vec3_add(camera.position, moveDirection, camera.position);
+    }
+
     if (key == GLFW_KEY_D && action == GLFW_PRESS)
-        //todo
+    {
+        glm_vec3_scale(camera.right, camera.cameraSpeed, moveDirection);
+        glm_vec3_sub(camera.position, moveDirection, camera.position);
+    }
+
         
 }
 
