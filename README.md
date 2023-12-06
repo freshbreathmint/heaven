@@ -10,6 +10,14 @@ Escape to Quit
 
 X = Toggle Wireframe Mode
 
+W = Move Forward
+
+A = Rotate Right
+
+S = Move Backwards
+
+D = Rotate Left
+
 ## Credits
 Developed by Mint
 
