@@ -19,6 +19,7 @@ include_directories(include)
 
 # Set Sources
 set(SOURCES
+    src/camera.c
     src/main.c
     src/object.c
     src/readfile.c
