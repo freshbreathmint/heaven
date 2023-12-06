@@ -1,5 +1,11 @@
 # Version History
 
+## 0.0.16
+
+Features:
+
+    - Camera system
+
 ## 0.0.15
 
 Features
