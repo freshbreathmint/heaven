@@ -4,7 +4,8 @@
 
 Features:
 
-    - Camera system
+    - Incredibly basic camera system
+    - WASD controls for moving the camera, they suck and are wrong.
 
 ## 0.0.15
 
