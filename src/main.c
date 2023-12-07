@@ -47,28 +47,28 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
     float speed = camera.cameraSpeed * deltaTime;
     vec3 moveDirection;
 
-    if (key == GLFW_KEY_W && action == GLFW_PRESS)
+    if (key == GLFW_KEY_W && (action == GLFW_PRESS || action == GLFW_REPEAT))
     {
         glm_vec3_scale(camera.front, camera.cameraSpeed, moveDirection);
         glm_vec3_add(camera.position, moveDirection, camera.position);
     }
 
-    if (key == GLFW_KEY_S && action == GLFW_PRESS)
+    if (key == GLFW_KEY_S && (action == GLFW_PRESS || action == GLFW_REPEAT))
     {
         glm_vec3_scale(camera.front, camera.cameraSpeed, moveDirection);
         glm_vec3_sub(camera.position, moveDirection, camera.position);
     }
 
-    if (key == GLFW_KEY_A && action == GLFW_PRESS)
-    {
-        glm_vec3_scale(camera.right, camera.cameraSpeed, moveDirection);
-        glm_vec3_add(camera.position, moveDirection, camera.position);
-    }
-
-    if (key == GLFW_KEY_D && action == GLFW_PRESS)
+    if (key == GLFW_KEY_A && (action == GLFW_PRESS || action == GLFW_REPEAT))
     {
         glm_vec3_scale(camera.right, camera.cameraSpeed, moveDirection);
         glm_vec3_sub(camera.position, moveDirection, camera.position);
+    }
+
+    if (key == GLFW_KEY_D && (action == GLFW_PRESS || action == GLFW_REPEAT))
+    {
+        glm_vec3_scale(camera.right, camera.cameraSpeed, moveDirection);
+        glm_vec3_add(camera.position, moveDirection, camera.position);
     }
 
         
@@ -160,7 +160,7 @@ int main()
     // Main Loop
     while (!glfwWindowShouldClose(window))
     {
-        // Update Time
+        // Time Logic
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
